@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { TaskService } from './Task.service';
 //los controllers sirven para agregar la logica de programacion de la aplicacion
 @Controller('/tasks') //ruta del endpoint para acceder a los metodos del controller
@@ -14,9 +14,16 @@ export class TasksController {
     return 'Obtengo todas las tareas';
   }
 
+  //Decorador Param Nativo de NestJS para obtener los parametros de la peticion
+  @Get('/:id') //ruta que recibe un id como parametro
+  getTask(@Param('id') id: number): string {
+    return 'El ID de la tarea es: ' + id;
+  }
+
+  //Decorador Body Nativo de NestJS para obtener el cuerpo de la peticion
   @Post()
-  createTasks(): string {
-    return 'Creo una tarea';
+  createTasks(@Body() Task: any) {
+    return Task;
   }
 
   @Put()
