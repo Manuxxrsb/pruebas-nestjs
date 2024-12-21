@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateUserDto } from './Dto/Create-User.dto';
 
 interface User {
   id: number;
@@ -19,5 +20,12 @@ export class UsersController {
       name: 'Manuel Solis',
     };
   }
-  v;
+
+  //Data Transfer Object (DTO) Aplicado para que al pesionar el . se muestre las propiedades del objeto
+  @Get('/dto')
+  createUser(@Body() Usuario: CreateUserDto): CreateUserDto {
+    console.log('Nombre de usuario: ' + Usuario.name);
+    console.log('Email de usuario: ' + Usuario.email);
+    return Usuario;
+  }
 }
