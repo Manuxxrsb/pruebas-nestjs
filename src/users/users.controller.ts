@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { CreateUserDto } from './Dto/Create-User.dto';
 
 interface User {
@@ -27,5 +27,12 @@ export class UsersController {
     console.log('Nombre de usuario: ' + Usuario.name);
     console.log('Email de usuario: ' + Usuario.email);
     return Usuario;
+  }
+
+  //ejemplo de httpcode para los status error
+  @Get('/error')
+  @HttpCode(404) //el status code va debajo del decorador para errores personalizados
+  getError() {
+    return 'Error 404 not found';
   }
 }
